@@ -6,6 +6,8 @@ import com.fundaments.boot.fundaments.bean.MyBeanWithProperties;
 import com.fundaments.boot.fundaments.component.ComponentDependency;
 import com.fundaments.boot.fundaments.pojo.UserPojo;
 import com.fundaments.boot.fundaments.utils.ImportanceLevel;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class FundamentsApplication implements CommandLineRunner {
+
+	private final Log LOGGER = LogFactory.getLog(FundamentsApplication.class);
 
 	private final ComponentDependency componentDependency;
 	private final MyBean myBean;
@@ -45,5 +49,6 @@ public class FundamentsApplication implements CommandLineRunner {
 		System.out.println("token: " + componentDependency.token() + " expires at " + myBean.to() + myBeanWithDependency.ipo(ImportanceLevel.HIGH));
 		System.out.println("Contract owner: " + myBeanWithProperties.function());
 		System.out.println("IPO owner: " + userPojo.getEmail() + ":" + userPojo.getPassword());
+		LOGGER.error("Error message");
 	}
 }
