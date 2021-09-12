@@ -9,19 +9,21 @@ public class ArtifactToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_token", nullable = false, unique = true)
     private Long id;
+    @Column(name = "id_owner")
+    private Integer idOwner;
     private String token;
     private Double ipo;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
     private Owner owner;
 
     public ArtifactToken() {
     }
 
-    public ArtifactToken(String token, Double ipo, Owner owner) {
-        this.token = token;
+    public ArtifactToken(Integer idOwner, Double ipo) {
+        this.idOwner = idOwner;
         this.ipo = ipo;
-        this.owner = owner;
     }
 
     public Long getId() {
@@ -36,8 +38,8 @@ public class ArtifactToken {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setToken() {
+        this.token = java.util.UUID.randomUUID().toString();
     }
 
     public Double getIpo() {
